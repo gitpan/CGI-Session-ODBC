@@ -1,0 +1,69 @@
+CGI::Session::ODBC version 0.01
+===============================
+
+CGI::Session::ODBC provides an ODBC database driver for use with 
+CGI::Session.  In theory, it should work with any ODBC-accessible
+database product, but the author provides no guarantees.
+
+This module has been tested under Windows XP Professional, Apache 2.0.46,
+and ActiveState Perl 5.8.0 Build 806.  It has been used to store and
+access session data in Microsoft Access XP, Microsoft SQL Server 2000,
+and MySQL 4.0.13.
+
+There are no special provisions made for row-level locking.  ODBC is intended
+to be platform independent, and to the best of the author's knowledge at the
+time of this writing, there is no platform independent manner of implementing
+row locking.  Please contact the author with your experiences with this module
+in that regard.
+
+The test suite leaves something to be desired.  See the comments in t/1.t to
+see what I am talking about.  The default test suite checks the existence of
+CGI::Session::ODBC and exists.  If you would like to perform more in-depth
+tests, perform the following steps:
+
+1) Create the following table in your ODBC-compliant database:
+
+   CREATE TABLE sessions (
+       id CHAR(32) NOT NULL,
+       a_session TEXT NOT NULL
+   );
+
+2) Change %options in t/1.t to something suitable for your database
+   installation.
+   
+3) Comment out these three lines in t/1.t:
+
+   use Test::More tests => 1;
+   use_ok('CGI::Session::ODBC');
+   exit();
+
+CGI::Session, DBI, and DBD::ODBC must be installed in order to use this
+module.
+
+This is the initial release of this module.  Should you encounter any issues
+in its use, please contact the author, Jason A. Crome <cromedome@cpan.org>.
+
+INSTALLATION
+
+To install this module type the following:
+
+   perl Makefile.PL
+   make
+   make test
+   make install
+
+DEPENDENCIES
+
+This module requires these other modules and libraries:
+
+  CGI::Session
+  DBI
+  DBD::ODBC
+
+COPYRIGHT AND LICENCE
+
+Copyright (C) 2003 by Jason A. Crome. All rights reserved.
+
+This library is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself.
+
